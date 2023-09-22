@@ -15,7 +15,7 @@ public class AIBehavior : MonoBehaviour
     public int waypointNumber;
     public bool isMoving;
     public float playerFollowRange;
-    public float followDuration;
+    //public float followDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -36,31 +36,33 @@ public class AIBehavior : MonoBehaviour
         {
             case AIState.FollowPlayer:
                 agent.SetDestination(playerPos.position);
-                followDuration -= Time.deltaTime;
+                //followDuration -= Time.deltaTime;
                 break;
             case AIState.Patrol:
-                followDuration += Time.deltaTime;
+                //followDuration += Time.deltaTime;
                 MultipleWaypointPatrol();
                 break;
             default: break;
 
         }
 
-        if (distanceToPlayer <= playerFollowRange)
+        //if (distanceToPlayer <= playerFollowRange)
+        //{
+        //    aiState = AIState.FollowPlayer;
+        //}
+        //else if (distanceToPlayer != playerFollowRange)
+        //{
+        //    aiState = AIState.Patrol;
+
+        //}
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             aiState = AIState.FollowPlayer;
         }
-        if (followDuration <= 0)
-        {
-            aiState = AIState.Patrol;
-
-        }
-        //else
-        //{
-        //    aiState = AIState.FollowPlayer;
-
-        //}
-
     }
 
     void MultipleWaypointPatrol()
