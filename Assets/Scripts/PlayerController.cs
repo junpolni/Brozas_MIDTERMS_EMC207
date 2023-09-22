@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotationSpd = 0.0f;
     private Rigidbody rb;
 
     Vector3 direction;
@@ -33,6 +34,13 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
 
         direction = new Vector3(x, 0, z).normalized;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpd * Time.deltaTime);
+        }
     }
 
     void Move()
