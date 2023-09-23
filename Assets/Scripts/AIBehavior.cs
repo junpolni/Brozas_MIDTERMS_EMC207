@@ -65,6 +65,14 @@ public class AIBehavior : MonoBehaviour
         }
     }
 
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        aiState = AIState.FollowPlayer;
+    //    }
+    //}
+
     void MultipleWaypointPatrol()
     {
         // returns true or false, if Ai has a next destination
